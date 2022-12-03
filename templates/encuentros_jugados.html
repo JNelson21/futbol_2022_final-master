@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% block title %} Encuentros Jugados {% endblock %}
+{% block content %}
+
+            <!-- End Mobile Nav-->
+
+            <!-- Section Title -->
+            <div class="section-title" style="background:url(/static/img/portada_encuentro.jpg)">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1>Encuentros </h1>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="breadcrumbs">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li>Encuentros</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Section Title -->
+
+            <!-- Section Area - Content Central -->
+            <section class="content-info">
+
+                <div class="container padding-top">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>Partidos Jugados</h1>
+                            <hr>
+                            <div class="recent-results results-page">
+                                <div class="info-results">
+                                    <ul>
+                                        {% for eju in encuentros_jugados %}
+                                        <li>
+                                            <span class="head">
+                                                <a href="single-result.html" class="btn-sm btn theme" style="font-size: 12px; border-radius: 0px">Ver más</a> <span class="date">{{ ej.fecha | date:'d-m-Y h:m'  }}</span>
+                                            </span>
+
+                                            <div class="goals-result" style="align-items: center">
+                                                <a href="single-team.html" style="margin-top:0px; width: 40%">
+                                                    <img src="{{eju.equipo_local.sede_id.ciudad_id.pais_id.logo_bandera.url}}" alt="">
+                                                    {{  eju.equipo_local.nombre}}
+                                                </a>
+
+                                                <span class="goals">
+                                                    <b>{{  eju.resultado_goles_local}}</b> - <b>{{  eju.resultado_goles_visita}}</b>
+                                                </span>
+
+                                                <a href="single-team.html" style="margin-top:0px; width: 40%">
+                                                    <img src="{{eju.equipo_visita.sede_id.ciudad_id.pais_id.logo_bandera.url}}" alt="">
+                                                    {{  eju.equipo_visita.nombre}}
+                                                </a>
+                                            </div>
+                                        </li> 
+                                        {% endfor %}                                   
+                                    </ul>
+                                </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <h1>Próximos Partidos</h1>
+                            <hr>
+                            <div class="recent-results results-page">
+                                <div class="info-results">
+                                    <ul>
+                                        {% for ej in encuentros_por_jugar %}
+                                        <li>
+                                            <span class="head">
+                                                <a href="single-result.html" class="btn-sm btn theme" style="font-size: 12px; border-radius: 0px">Ver más</a> <span class="date">{{ ej.fecha | date:'d-m-Y h:m'  }}</span>
+                                            </span>
+
+                                            <div class="goals-result" style="align-items: center">
+                                                <a href="single-team.html" style="margin-top:0px; width: 40%">
+                                                    <img src="{{ej.equipo_local.sede_id.ciudad_id.pais_id.logo_bandera.url}}" alt="">
+                                                    {{  ej.equipo_local.nombre}}
+                                                </a>
+
+                                                <span class="goals">
+                                                    <b>{{  ej.resultado_goles_local}}</b> - <b>{{  ej.resultado_goles_visita}}</b>
+                                                </span>
+
+                                                <a href="single-team.html" style="margin-top:0px; width: 40%">
+                                                    <img src="{{ej.equipo_visita.sede_id.ciudad_id.pais_id.logo_bandera.url}}" alt="">
+                                                    {{  ej.equipo_visita.nombre}}
+                                                </a>
+                                            </div>
+                                        </li> 
+                                        {% endfor %}                                   
+                                    </ul>
+                                </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
