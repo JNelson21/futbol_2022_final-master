@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from project.views import contextoEncuentros,contadoresAdmin, contextoJugador, contextoCompetencias,contextoEquipo,contextoCompetenciasFutbol,contextoContacto,contextoFixtureCompetencia,index,contextoListaJugadoresPorGoles,contextoListaJugadoresPorAmarillas,contextoListaJugadoresPorRojas
+from project.views import contextoSedes, contextoEncuentros,contadoresAdmin, contextoListaJugadoresPorAsistencias, contextoJugador, contextoCompetencias,contextoEquipo,contextoCompetenciasFutbol,contextoContacto,contextoFixtureCompetencia,index,contextoListaJugadoresPorGoles,contextoListaJugadoresPorAmarillas,contextoListaJugadoresPorRojas
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -33,6 +33,8 @@ urlpatterns = [
     path('lista_jugadores_goles',contextoListaJugadoresPorGoles),
     path('lista_jugadores_amarillas',contextoListaJugadoresPorAmarillas),
     path('lista_jugadores_rojas',contextoListaJugadoresPorRojas),
+    path('lista_jugadores_asistencias',contextoListaJugadoresPorAsistencias),
+    path('futbol/sedes',contextoSedes),
     path('__debug__/', include('debug_toolbar.urls')),
     path('', index),
 ]

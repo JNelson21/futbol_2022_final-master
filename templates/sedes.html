@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %} Competencias - Sistema de Gestion de Futbol {% endblock %}
+            
+{% block content %}     
+            <!-- Section Title -->
+            <div class="section-title" style="background:url(/static/img/background-competencias.jpg)">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1>Sedes de Futbol</h1>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="breadcrumbs">
+                                <ul>
+                                    <li><a href="index.html">Inicio</a></li>
+                                    <li>Competencias/{{ deporte.nombre.lower }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Section Title -->
+
+            <!-- Section Area - Content Central -->
+            <section class="content-info">
+
+                <div class="container padding-top">
+                    <div class="groups-list page-group">
+                        <h1> {{ deporte.nombre }}</h1>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                               <h5><a>Estadios</a></h5>
+                                <div class="item-group">
+                                    <ul>
+                                        {% for cs in sedes_competencia %}
+                                        <li>
+                                           <a href="">
+                                                <img src="{{ cs.logo_competicion.url }}" alt="">
+                                                {{ cs.nombre }}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section Area -  Content Central -->
+
+{% endblock %}

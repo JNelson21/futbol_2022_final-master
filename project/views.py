@@ -4,7 +4,7 @@ from appArbitro.models import arbitro
 from appContrato.models import contrato, persona, tipo_persona
 from appEquipo.models import equipo, alineacion_equipo
 from appCompeticion.models import competicion,deporte,tipo_competicion,detalle_grupo,fase,grupo
-from appPartido.models import encuentro,evento_persona
+from appPartido.models import encuentro,evento_persona,sede
 from appCompeticion.models import deporte
 from user.models import User
 from django.db.models import Count
@@ -112,6 +112,16 @@ def contextoEncuentros(request,nombre_competicion):
     }
     return render(request,'encuentros_jugados.html',data)
 
+def contextoSedes(request):
+    # competencia_seleccionada = competicion.objects.get(nombre=nombre_competicion.upper())   
+    # encuentros = encuentro.objects.all().filter(competicion_id=competencia_seleccionada)   
+    sedes_competencia=sede.objects.filter(estado='DI')
+    data={
+        'sedes_competencia': sedes_competencia
+    }
+    return render(request,'sedes.html',data)
+
+
 def contextoEquipo(request, nombre_equipo):
     equipos = equipo.objects.get(nombre=nombre_equipo.upper())
     tipo_persona_entrenador = tipo_persona.objects.get(descripcion='ENTRENADOR')
@@ -203,6 +213,7 @@ def contextoListaJugadoresPorGoles(request):
         li = persona.objects.all().filter(persona_id = r.get('persona_id'))
         for v in li :
             lista2.append(v)
+            print(v)
 
     data={
         'result': resulta,
@@ -236,6 +247,21 @@ def contextoListaJugadoresPorRojas(request):
         'jugadores_rojas': lista2
     }
     return render(request, 'lista_jugadores_rojas.html', data)
+
+def contextoListaJugadoresPorAsistencias(request):
+    resulta = evento_persona.objects.filter(evento_id=19).values('persona_id').annotate(count=Count('persona_id')).order_by()  
+    lista2= []
+    for r in resulta :
+        li = persona.objects.all().filter(persona_id = r.get('persona_id'))
+        for v in li :
+            lista2.append(v)
+
+    data={
+        'result': resulta,
+        'jugadores_asistencias': lista2
+    }
+    return render(request, 'lista_jugadores_asistencias.html', data)
+
 
 def contextoTablaPosiciones(request,competencia,grupos):
 
